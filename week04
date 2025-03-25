@@ -34,6 +34,7 @@ void loop()
 
 
 // 미세먼지 데이터 LCD 표시
+// 전선 미세먼지센서와 LCD를 브레드보드를 사용해 연결하기
 #include <Wire.h>               // I2C 통신을 위한 기본 라이브러리
 #include <LiquidCrystal_I2C.h>  // I2C LCD 라이브러리
 
