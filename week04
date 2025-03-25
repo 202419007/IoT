@@ -1,6 +1,7 @@
 //이론
 //I2C는 Low로만 움직일 수 있어서 풀업 저항으로 HIGH을 유지해 줘서 움직일 수 있다.
 
+
 //실습
 // Tinkercad에서 Arduino와 LCD 16 x 2 (I2C)을 이용해 유형과 주소를, 전선을 알맞게 설정한뒤에 밑에 코드로 실행한다.
 // 아두이노 외부라이브러리를 추가한다.
@@ -30,6 +31,7 @@ void loop()
     delay(150);
   }
 }
+
 
 // 미세먼지 데이터 LCD 표시
 #include <Wire.h>               // I2C 통신을 위한 기본 라이브러리
@@ -73,6 +75,7 @@ void loop()
   delay(1000);
   lcd.clear();
 }
+
 
 // 아두이노 1602 LCD I2C 주소 찾기
 #include <Wire.h>               // I2C 통신을 위한 기본 라이브러리
