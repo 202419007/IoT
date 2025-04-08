@@ -1,3 +1,5 @@
+//Cygwin
+
 configuration BlinkAppC
 {
 }
