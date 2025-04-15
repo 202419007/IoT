@@ -5,6 +5,7 @@ void setup() {
 
 void loop() {
   static unsigned long loopCnt = 0;
+  // unsigned long loopCnt = 0;  // 1만 나옴
   static unsigned long nextMil = millis() + 1000;
 
   loopCnt++;  // loopCnt = loopCnt + 1;
