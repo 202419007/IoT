@@ -23,6 +23,9 @@ To use the JobQueue, you must install PTB via
 """
 
 import logging
+import sys
+import time
+import cv2
 
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
@@ -59,6 +62,11 @@ def takePhoto():
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Sends explanation on how to use the bot."""
     await update.message.reply_text("Hi! Use /set <seconds> to set a timer")
+
+
+async def test(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Sends explanation on how to use the bot."""
+    await update.message.reply_text("test")
 
 
 async def alarm(context: ContextTypes.DEFAULT_TYPE) -> None:
