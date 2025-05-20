@@ -1,3 +1,5 @@
+# /set 5
+
 #!/usr/bin/env python
 # pylint: disable=unused-argument
 # This program is dedicated to the public domain under the CC0 license.
@@ -26,6 +28,9 @@ import logging
 
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
+import serial
+
+seri = serial.Serial('/dev/ttyACM0', baudrate = 9600, timeout = None)
 
 # Enable logging
 logging.basicConfig(
@@ -49,10 +54,13 @@ async def alarm(context: ContextTypes.DEFAULT_TYPE) -> None:
     job = context.job
     await context.bot.send_message(job.chat_id, text=f"Beep! {job.data}  seconds are over!")
 
+
 async def dustToInfluxDB(context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Send the alarm message."""
+    if seri.in_waiting !=0:
+        content = seri.readline()
+        a = float(content.decode())
     job = context.job
-    await context.bot.send_message(job.chat_id, text=f"Beep! /dust seconds are over!")
+    await context.bot.send_message(job.chat_id, text=f"Dust Sensor Value! {a}")
 
 def remove_job_if_exists(name: str, context: ContextTypes.DEFAULT_TYPE) -> bool:
     """Remove job with given name. Returns whether job was removed."""
@@ -75,7 +83,7 @@ async def set_timer(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             return
 
         job_removed = remove_job_if_exists(str(chat_id), context)
-        context.job_queue.run_once(alarm, due, chat_id=chat_id, name=str(chat_id), data=due)
+        context.job_queue.run_repeating(dustToInfluxDB, due, chat_id=chat_id, name=str(chat_id), data=due)
 
         text = "Timer successfully set!"
         if job_removed:
