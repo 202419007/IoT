@@ -9,3 +9,11 @@ echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https
 ```
  sudo apt-get update && sudo apt-get install influxdb -y
 ```
+* InfluxDB as a background service on startup
+```
+sudo service influxdb start
+```
+* InfluxDB is status (service)
+```
+sudo service influxdb status
+```
